@@ -4,7 +4,7 @@ import "./CreateShore.css";
 import { Icon } from "@iconify/react";
 import Modal from "../Modal/Modal";
 
-function CreateShore() {
+function CreateShore({ id }) {
   const [nomeTarefa, setNomeTarefa] = useState("");
   const [listaTarefas, setListaTarefas] = useState([]);
 
@@ -14,6 +14,8 @@ function CreateShore() {
   const [novaDescricao, setNovaDescricao] = useState("");
   const [categoria, setCategoria] = useState("");
   const [novaCategoria, setNovaCategoria] = useState("");
+
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/api/get/tarefas").then((response) => {
@@ -57,7 +59,98 @@ function CreateShore() {
   return (
     <div>
       <div>
-        <div className="create-">
+        {listaTarefas.map((val, index) => {
+          if (id == val.categoria_tarefa) {
+            return (
+              <div key={index} className="card-tarefa">
+                {show ? (
+                  <div className="organize">
+                    <input
+                      placeholder="Rename the shore..."
+                      type="text"
+                      id="updateInput"
+                      onChange={(e) => {
+                        setNovoNomeTarefa(e.target.value);
+                      }}
+                    />
+                    <input
+                      placeholder="Description..."
+                      type="text"
+                      id="updateInput"
+                      onChange={(e) => {
+                        setNovaDescricao(e.target.value);
+                      }}
+                    />
+                    <input
+                      placeholder="Which category belongs..."
+                      type="text"
+                      id="updateInput"
+                      onChange={(e) => {
+                        setNovaCategoria(e.target.value);
+                      }}
+                    />
+                    <div>
+                      <button
+                        onClick={() => {
+                          updateShore(val.id_tarefa);
+                        }}
+                      >
+                        Confirm
+                      </button>
+
+                      <button
+                        className="close-modal"
+                        onClick={(id_tarefa) => {
+                          console.log(val.id_tarefa);
+                          setShow(!show);
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="organize">
+                    <input id="checkbox" type="checkbox" />
+
+                    <p className="nome-tarefa">{val.titulo_tarefa}</p>
+                    <p className="descricao">{val.descricao_tarefa}</p>
+                    <p className="date">{val.data_tarefa}</p>
+                  </div>
+                )}
+
+                <div className="icon">
+                  <div className="icon-edit">
+                    <Icon
+                      icon="fa6-solid:pen"
+                      color="#aaa"
+                      width="20"
+                      cursor="pointer"
+                      onClick={() => {
+                        setShow(!show);
+                      }}
+                    />
+                  </div>
+
+                  <div>
+                    <Icon
+                      icon="codicon:trash"
+                      color="#aaa"
+                      width="30"
+                      cursor="pointer"
+                      onClick={() => {
+                        deleteShore(val.titulo_tarefa);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          }
+        })}
+      </div>
+      <div>
+        {/* <div className="create-">
           <input
             placeholder="Nova Tarefa..."
             type="text"
@@ -71,9 +164,9 @@ function CreateShore() {
           <button className="submit" onClick={submitShore}>
             + New
           </button>
-        </div>
+        </div> */}
       </div>
-      <div className="form">
+      {/* <div className="form">
         {listaTarefas.map((val, index) => {
           return (
             <div key={index} className="category">
@@ -142,7 +235,7 @@ function CreateShore() {
             </div>
           );
         })}
-      </div>
+      </div>*/}
     </div>
   );
 }

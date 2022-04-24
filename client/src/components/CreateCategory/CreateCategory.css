@@ -3,9 +3,10 @@
 .category {
   background-color: #eee;
   display: flex;
-  min-width: 250px;
-  width: 50%;
+  width: 94%;
+  min-width: 50vw;
   max-width: 800px;
+
   justify-content: space-between;
   padding: 20px;
   border-radius: 20px;
@@ -23,7 +24,7 @@
   min-width: 250px;
   width: 50%;
   max-width: 800px;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 20px;
   border-radius: 20px;
   margin: 5px;
@@ -65,11 +66,54 @@
   background-color: #6ba8b0;
 }
 
+.submit-change {
+  background-color: #8ac9d0;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  min-width: 100px;
+
+  border-radius: 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.submit-change:hover {
+  background-color: #6ba8b0;
+}
+
+.submit-cancel {
+  background-color: #d9afd9;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  min-width: 100px;
+
+  border-radius: 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.submit-cancel:hover {
+  background-color: #c69ac6;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#updateInput-2 {
+  background-color: rgba(172, 220, 225, 0.612);
+  width: 50%;
+  align-items: center;
+  padding-left: 10px;
 }
 
 .form input {
@@ -84,8 +128,6 @@
   font-weight: 300;
   color: rgb(107, 107, 107);
   border: none;
-
-  text-align: center;
 }
 
 .form input:focus {
@@ -113,6 +155,11 @@
 
 .return:hover {
   background-color: #eee;
+}
+
+.edit {
+  display: flex;
+  align-items: center;
 }
 
 .icon {

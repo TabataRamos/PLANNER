@@ -47,11 +47,19 @@ app.post("/api/insert", (req, res) => {
 
 app.post("/api/insert/tarefas", (req, res) => {
   const nomeTarefa = req.body.nomeTarefa;
+  const descricao = req.body.descricao;
+  const categoria = req.body.categoria;
+  const dataTarefa = req.body.dataTarefa;
 
-  const sqlInsert = "INSERT INTO tarefas (titulo_tarefa) VALUES (?);";
-  db.query(sqlInsert, [nomeTarefa], (err, result) => {
-    console.log(result);
-  });
+  const sqlInsert =
+    "INSERT INTO tarefas (titulo_tarefa, descricao_tarefa, categoria_tarefa, data_tarefa) VALUES (?, ?, ?, ?);";
+  db.query(
+    sqlInsert,
+    [nomeTarefa, descricao, categoria, dataTarefa],
+    (err, result) => {
+      console.log(result);
+    }
+  );
 });
 
 app.delete("/api/delete/:nomeCategoria", (req, res) => {

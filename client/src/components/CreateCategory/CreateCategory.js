@@ -4,12 +4,16 @@ import "./CreateCategory.css";
 import { Icon } from "@iconify/react";
 import Modal from "../Modal/Modal";
 import CreateShore from "../CreateShore/CreateShore";
+import Form from "../Form/Form";
 
 function CreateCategory() {
+  const meusItens = ["React", "Vue", "Angular"];
   const [nomeCategoria, setNomeCategoria] = useState("");
   const [listaCategorias, setListaCategorias] = useState([]);
 
   const [novoNomeCategoria, setNovoNomeCategoria] = useState("");
+
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/api/get").then((response) => {
@@ -52,60 +56,82 @@ function CreateCategory() {
     <div className="App">
       <h1>PLANNER ORIENTATION</h1>
 
+      {/* <Form /> */}
+
       <div className="return">
         <Icon icon="bi:arrow-return-left" color="#aaa" width="32" />
       </div>
 
-      <CreateShore />
       <div className="form">
         {listaCategorias.map((val) => {
           return (
-            <div key={val.id_categoria} className="category">
-              <h1>
-                {val.id_categoria} - {val.nome_categoria}{" "}
-              </h1>
-              <div>
-                <input
-                  placeholder="Rename the category..."
-                  type="text"
-                  id="updateInput"
-                  onChange={(e) => {
-                    setNovoNomeCategoria(e.target.value);
-                  }}
-                />
-                <div>
-                  <button
-                    onClick={() => {
-                      updateCategory(val.id_categoria);
-                    }}
-                  >
-                    Confirm
-                  </button>
+            <div>
+              <div key={val.id_categoria} className="category">
+                {show ? (
+                  <div className="edit">
+                    <input
+                      placeholder={`${val.nome_categoria} ...`}
+                      type="text"
+                      id="updateInput-2"
+                      onChange={(e) => {
+                        setNovoNomeCategoria(e.target.value);
+                      }}
+                    />
+                    <div className="edit">
+                      <button
+                        className="submit-change"
+                        onClick={() => {
+                          updateCategory(val.id_categoria);
+                        }}
+                      >
+                        Change
+                      </button>
 
-                  <button className="close-modal">Cancel</button>
+                      <button
+                        className="submit-cancel"
+                        onClick={() => {
+                          setShow(!show);
+                        }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <h1>
+                    {val.id_categoria} - {val.nome_categoria}{" "}
+                  </h1>
+                )}
+
+                <div className="icon">
+                  <div className="icon-edit">
+                    <Icon
+                      icon="fa6-solid:pen"
+                      color="#aaa"
+                      width="20"
+                      cursor="pointer"
+                      onClick={() => {
+                        console.log(val.id_categoria);
+                        setShow(!show);
+                      }}
+                    />
+                  </div>
+
+                  <div>
+                    <Icon
+                      icon="codicon:trash"
+                      color="#aaa"
+                      width="30"
+                      cursor="pointer"
+                      onClick={() => {
+                        deleteCategory(val.nome_categoria);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="icon">
-                <div className="icon-edit">
-                  <Icon
-                    icon="fa6-solid:pen"
-                    color="#aaa"
-                    width="20"
-                    cursor="pointer"
-                  />
-                </div>
-
-                <div>
-                  <Icon
-                    icon="codicon:trash"
-                    color="#aaa"
-                    width="30"
-                    cursor="pointer"
-                    onClick={() => {
-                      deleteCategory(val.nome_categoria);
-                    }}
-                  />
-                </div>
+              <div>
+                <CreateShore id={val.id_categoria} />
               </div>
             </div>
           );

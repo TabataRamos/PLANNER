@@ -1,0 +1,36 @@
+.create-box {
+  position: relative;
+  left: 15%;
+  right: 15%;
+  background-color: rgba(238, 238, 238, 0.552);
+  width: 70%;
+  padding-top: 5px;
+  border-radius: 20px;
+}
+
+.create-shore {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.create-shore input {
+  background-color: transparent;
+  width: 275px;
+  height: 30px;
+
+  font-size: 22px;
+  border-radius: 20px;
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 300;
+  color: rgb(107, 107, 107);
+  border: none;
+
+  text-align: center;
+}
+
+.create-shore input:focus {
+  outline: none;
+}

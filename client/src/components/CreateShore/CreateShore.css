@@ -1,26 +1,40 @@
-.create-shore {
+.card-tarefa {
+  position: relative;
   display: flex;
-  flex-direction: column;
+  background-color: rgba(230, 230, 230, 0.516);
+  width: 94%;
+  min-width: 50vw;
+  max-width: 800px;
+  min-height: 10vh;
+  left: 2%;
+  border-radius: 5px 0px 20px 5px;
+  box-shadow: 0px 2px 5px rgb(158, 158, 158);
+  padding: 0 10px;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  margin-top: 2px;
 }
 
-.create-shore input {
-  background-color: transparent;
-  width: 275px;
-  height: 30px;
-
-  font-size: 22px;
-  border-radius: 20px;
-  font-family: "Poppins";
-  font-size: 20px;
+.nome-tarefa {
   font-weight: 300;
-  color: rgb(107, 107, 107);
-  border: none;
-
-  text-align: center;
+  width: 20%;
 }
 
-.create-shore input:focus {
-  outline: none;
+.descricao {
+  max-width: 40%;
+}
+
+.date {
+  font-size: 14px;
+}
+
+.organize {
+  display: flex;
+  width: 120%;
+  justify-content: space-around;
+  align-items: center;
+}
+#checkbox {
+  width: 20%;
+  height: 3vh;
 }
